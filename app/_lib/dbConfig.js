@@ -1,8 +1,11 @@
 import mongoose from "mongoose";
 
+const uri = process.env.MONGO_URI
+
+
 export async function connect() {
     try {
-        mongoose.connect(process.env.MONGO_URI);
+        mongoose.connect(uri);
         const connection = mongoose.connection;
 
         connection.on("connected", () => {
