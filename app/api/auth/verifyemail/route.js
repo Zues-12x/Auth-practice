@@ -10,11 +10,10 @@ export async function POST(NextRequest) {
     try {
 
         const { token } = await NextRequest.json();
-        console.log(token)
         const user = await User.findOne({ verifyToken: token, verifyTokenExpiry: { $gt: Date.now() } });
 
         if (!user) {
-            return NextResponse.json({ messaage: "Invalid or exprired token" }, { status: 400 })
+            return NextResponse.json({ error: "Invalid or exprired token" }, { status: 400 })
         }
 
         user.isVerified = true;

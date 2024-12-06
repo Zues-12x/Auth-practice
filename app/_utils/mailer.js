@@ -12,7 +12,7 @@ export async function sendMail({ email, emailType, userId }) {
                 verifyToken: hashedToken,
                 verifyTokenExpiry: Date.now() + 3600000
             })
-        } else if (emailType === "VERIFY") {
+        } else if (emailType === "RESET") {
             await User.findByIdAndUpdate(userId, {
                 forgotPasswordToken: hashedToken,
                 forgotPasswordTokenExpiry: Date.now() + 3600000

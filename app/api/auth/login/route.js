@@ -16,13 +16,13 @@ export async function POST(NextRequest) {
         const user = await User.findOne({ email });
 
         if (!user) {
-            return NextResponse.json({ message: "User does not exist" }, { status: 400 })
+            return NextResponse.json({ error: "User does not exist" }, { status: 400 })
         }
 
         const isPassValid = await bcryptjs.compare(password, user.password);
 
         if (!isPassValid) {
-            return NextResponse.json({ message: "Invalid credentials" }, { status: 400 })
+            return NextResponse.json({ error: "Invalid credentials" }, { status: 400 })
         }
 
         const token = await jwt.sign({ id: user._id }, jwtSecret, { expiresIn: '7d' });
