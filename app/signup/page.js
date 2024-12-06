@@ -26,8 +26,7 @@ export default function page() {
                     placeholder="Password"
                     className="border rounded-md p-2 w-full mb-4 text-black"
                 />
-                <Button />
-
+                <Button normalText={"Sign Up"} loadingText={"Signing Up..."} />
             </form>
         </div >
     )

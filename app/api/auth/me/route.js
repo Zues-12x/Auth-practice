@@ -11,7 +11,7 @@ export async function POST(NextRequest) {
         const user = await User.findOne({ _id: id }).select("-password");
 
         if (!user) {
-            return NextResponse.json({ message: "User does not exist" }, { status: 400 })
+            return NextResponse.json({ error: "User does not exist" }, { status: 400 })
         }
         return NextResponse.json({ success: true, data: user }, { status: 200 },)
 

@@ -1,8 +1,10 @@
 import { verifyAction } from "../actions/actions";
+import Button from "../components/Button";
 
 export default async function page({ searchParams }) {
 
-    const data = await searchParams;
+    const { token } = await searchParams || " ";
+
     return (
         <main className='flex justify-center items-center flex-col gap-6 pt-32'>
             <h1 className='text-3xl font-semibold'>Click here to verify your account</h1>
@@ -10,13 +12,9 @@ export default async function page({ searchParams }) {
                 <input
                     name="token"
                     type="hidden"
-                    value={data.token}
+                    value={token}
                 />
-                <button
-                    type="submit"
-                    className='inline-block bg-blue-700 text-gray-300 px-6 py-3 text-lg'>
-                    Verfiy Account
-                </button>
+                <Button normalText={"Verify your account"} loadingText={"Verifying..."} isDisabled={token?.length < 45} />
             </form>
         </main>
     )

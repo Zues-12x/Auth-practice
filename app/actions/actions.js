@@ -2,6 +2,7 @@
 "use server"
 
 import { redirect } from "next/navigation"
+import { extractTokenFromCookieHeader, storeToken } from "../_utils/storeToken"
 
 export async function signUpAction(formdata) {
     try {
@@ -35,11 +36,19 @@ export async function logInAction(formdata) {
 
         const response = await fetch('http://localhost:3000/api/auth/login', {
             method: 'POST',
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 email, password
             }),
         });
+
+        // const token = await extractTokenFromCookieHeader(response?.headers);
+
+        // if (token) {
+        //     storeToken(token)
+        // }
+
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.error || "An error occured");
